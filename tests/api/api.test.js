@@ -162,3 +162,57 @@ test('should pay for a job', async () => {
   expect(contractor.balance).toBe(64 + 50);
   expect(job.paid).toBeTruthy();
 });
+
+test('should deposit money into the the the balance of a client', async () => {
+  const { Profile, Contract, Job } = sequelize.models;
+
+  const client = await Profile.create({
+    id: 3,
+    firstName: 'John',
+    lastName: 'Lenon',
+    profession: 'Musician',
+    balance: 100,
+    type: 'client',
+  });
+  const contract = await Contract.create({
+    id: 2,
+    ContractorId: 2,
+    ClientId: 3,
+    title: 'Contract 3',
+    terms: '',
+    status: 'in_progress',
+  });
+
+  expect(client.balance).toBe(100);
+
+  const success_response = await supertest(app)
+    .post('/balances/deposit/3')
+    .set('profile_id', '3')
+    .send({ amount: 50 });
+
+  console.log(success_response.body);
+
+  await client.reload();
+
+  expect(success_response.status).toBe(200);
+  expect(client.balance).toBe(150);
+
+  const job = await Job.create({
+    id: 1,
+    description: 'work',
+    price: 500,
+    paid: false,
+    paymentDate: '2020-08-14T23:11:26.737Z',
+    ContractId: 2,
+  });
+
+  const error_response = await supertest(app)
+    .post('/balances/deposit/3')
+    .set('profile_id', '3')
+    .send({ amount: 200 });
+
+  await client.reload();
+
+  expect(error_response.status).toBe(403);
+  expect(client.balance).toBe(150);
+});

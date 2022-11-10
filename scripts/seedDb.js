@@ -229,14 +229,12 @@ async function seed() {
       description: 'work',
       price: 121,
       paid: false,
-      paymentDate: '2020-08-14T23:11:26.737Z',
       ContractId: 4,
     }),
     Job.create({
       description: 'work',
       price: 121,
       paid: false,
-      paymentDate: '2020-08-14T23:11:26.737Z',
       ContractId: 6,
     }),
   ]);
