@@ -60,14 +60,14 @@ app.get('/jobs/unpaid', getProfile, async (req, res) => {
   res.json(jobs);
 });
 
-app.post('/jobs/:job_id/pay', getProfile, async (req, res) => {
+app.post('/jobs/:jobId/pay', getProfile, async (req, res) => {
   const { Profile, Contract, Job } = req.app.get('models');
 
-  const { job_id } = req.params;
+  const { jobId } = req.params;
 
   const job = await Job.findOne({
     where: {
-      id: job_id,
+      id: jobId,
       paid: false,
     },
   });
