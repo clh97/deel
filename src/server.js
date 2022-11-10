@@ -2,7 +2,10 @@ const app = require('./app');
 
 init();
 
-async function init() {
+function init() {
+  if (process.env.NODE_ENV === 'test') {
+    return;
+  }
   try {
     app.listen(3001, () => {
       console.log('Express App Listening on Port 3001');
