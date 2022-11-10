@@ -33,4 +33,31 @@ app.get('/contracts', getProfile, async (req, res) => {
   if (!contracts || contracts.length == 0) return res.status(404).end();
   res.json(contracts);
 });
+
+app.get('/jobs/unpaid', getProfile, async (req, res) => {
+  const { Contract, Job } = req.app.get('models');
+
+  const contracts = await Contract.findAll({
+    where: {
+      ContractorId: req.profile.id,
+      status: 'in_progress',
+    },
+  });
+
+  if (!contracts || contracts.length == 0) return res.status(404).end();
+
+  const contractIds = contracts.map((contract) => contract.id);
+
+  const jobs = await Job.findAll({
+    where: {
+      paid: false,
+      ContractId: {
+        [Op.in]: contractIds,
+      },
+    },
+  });
+  if (!jobs || jobs.length == 0) return res.status(404).end();
+  res.json(jobs);
+});
+
 module.exports = app;
