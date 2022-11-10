@@ -114,3 +114,51 @@ test('should return all unpaid jobs for a user', async () => {
   expect(success_response.status).toBe(200);
   expect(success_response.body.length).toBe(1);
 });
+
+test('should pay for a job', async () => {
+  const { Profile, Contract, Job } = sequelize.models;
+
+  const client = await Profile.create({
+    id: 3,
+    firstName: 'John',
+    lastName: 'Lenon',
+    profession: 'Musician',
+    balance: 100,
+    type: 'client',
+  });
+  const contract = await Contract.create({
+    id: 2,
+    ContractorId: 2,
+    ClientId: 3,
+    title: 'Contract 3',
+    terms: '',
+    status: 'in_progress',
+  });
+  const job = await Job.create({
+    id: 1,
+    description: 'work',
+    price: 50,
+    paid: false,
+    paymentDate: '2020-08-14T23:11:26.737Z',
+    ContractId: 2,
+  });
+  const contractor = await Profile.findByPk(2);
+
+  expect(client.balance).toBe(100);
+  expect(contractor.balance).toBe(64);
+  expect(job.paid).toBeFalsy();
+
+  // success case - valid client, valid client balance, valid job
+  const success_response = await supertest(app)
+    .post('/jobs/1/pay')
+    .set('profile_id', '3');
+
+  await client.reload();
+  await contractor.reload();
+  await job.reload();
+
+  expect(success_response.status).toBe(200);
+  expect(client.balance).toBe(50);
+  expect(contractor.balance).toBe(64 + 50);
+  expect(job.paid).toBeTruthy();
+});
