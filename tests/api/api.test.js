@@ -1,7 +1,3 @@
-// const supertest = require('supertest');
-// const app = require('../../src/server');
-// const sequelize = require('../../src/model').sequelize;
-
 import supertest from 'supertest';
 
 import app from '../../src/app';
