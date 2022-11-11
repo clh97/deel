@@ -190,8 +190,6 @@ test('should deposit money into the the the balance of a client', async () => {
     .set('profile_id', '3')
     .send({ amount: 50 });
 
-  console.log(success_response.body);
-
   await client.reload();
 
   expect(success_response.status).toBe(200);
@@ -215,4 +213,67 @@ test('should deposit money into the the the balance of a client', async () => {
 
   expect(error_response.status).toBe(403);
   expect(client.balance).toBe(150);
+});
+
+test('should return the profession that earned the most money', async () => {
+  const { Profile, Contract, Job } = sequelize.models;
+
+  const client = await Profile.create({
+    id: 3,
+    firstName: 'John',
+    lastName: 'Lenon',
+    profession: 'Musician',
+    balance: 100,
+    type: 'client',
+  });
+  const contract = await Contract.create({
+    id: 2,
+    ContractorId: 1,
+    ClientId: 3,
+    title: 'Contract 3',
+    terms: '',
+    status: 'in_progress',
+  });
+  const contract2 = await Contract.create({
+    id: 3,
+    ContractorId: 2,
+    ClientId: 3,
+    title: 'Contract 3',
+    terms: '',
+    status: 'in_progress',
+  });
+  const job = await Job.create({
+    id: 1,
+    description: 'work1',
+    price: 50,
+    paid: true,
+    paymentDate: '2020-01-01T23:11:26.737Z',
+    ContractId: 2,
+  });
+  const job2 = await Job.create({
+    id: 2,
+    description: 'work2',
+    price: 51,
+    paid: true,
+    paymentDate: '2021-01-01T23:11:26.737Z',
+    ContractId: 3,
+  });
+
+  const success_response = await supertest(app)
+    .get('/admin/best-profession?start=01-01-2020&end=01-02-2020')
+    .set('profile_id', '3')
+    .send();
+
+  const success_response2 = await supertest(app)
+    .get('/admin/best-profession?start=01-01-2021&end=01-02-2021')
+    .set('profile_id', '3')
+    .send();
+
+  expect(success_response.status).toBe(200);
+  expect(success_response.body.bestProfession.profession).toBe('Musician');
+  expect(success_response.body.bestProfession.totalEarned).toBe(50);
+
+  expect(success_response2.status).toBe(200);
+  expect(success_response2.body.bestProfession.profession).toBe('Wizard');
+  expect(success_response2.body.bestProfession.totalEarned).toBe(51);
 });

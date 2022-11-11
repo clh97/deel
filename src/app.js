@@ -200,4 +200,50 @@ app.post('/balances/deposit/:userId', getProfile, async (req, res) => {
   }
 });
 
+app.get('/admin/best-profession', getProfile, async (req, res) => {
+  const { Profile, Contract, Job } = req.app.get('models');
+
+  const { start, end } = req.query;
+
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+
+  const bestProfession = await Profile.findAll({
+    where: {
+      type: 'contractor',
+    },
+    group: ['profession'],
+    order: [[sequelize.col('totalEarned'), 'DESC']],
+    limit: 1,
+    subQuery: false,
+    attributes: [
+      'profession',
+      [sequelize.fn('SUM', sequelize.col('price')), 'totalEarned'],
+    ],
+    include: [
+      {
+        model: Contract,
+        as: 'Contractor',
+        attributes: [],
+        required: true,
+        include: [
+          {
+            model: Job,
+            required: true,
+            attributes: [],
+            where: {
+              paid: true,
+              paymentDate: {
+                [Op.between]: [startDate, endDate],
+              },
+            },
+          },
+        ],
+      },
+    ],
+  });
+
+  res.status(200).json({ bestProfession: bestProfession[0] }).end();
+});
+
 module.exports = app;
