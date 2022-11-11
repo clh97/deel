@@ -277,3 +277,74 @@ test('should return the profession that earned the most money', async () => {
   expect(success_response2.body.bestProfession.profession).toBe('Wizard');
   expect(success_response2.body.bestProfession.totalEarned).toBe(51);
 });
+
+test('should return the best paying clients', async () => {
+  const { Profile, Contract, Job } = sequelize.models;
+
+  const client = await Profile.create({
+    id: 3,
+    firstName: 'John',
+    lastName: 'Lenon',
+    profession: 'Musician',
+    balance: 100,
+    type: 'client',
+  });
+  const client2 = await Profile.create({
+    id: 4,
+    firstName: 'Joao',
+    lastName: 'Carlos',
+    profession: 'Carpenter',
+    balance: 500,
+    type: 'client',
+  });
+  const contract = await Contract.create({
+    id: 2,
+    ContractorId: 1,
+    ClientId: 3,
+    title: 'Contract 3',
+    terms: '',
+    status: 'in_progress',
+  });
+  const contract2 = await Contract.create({
+    id: 3,
+    ContractorId: 1,
+    ClientId: 4,
+    title: 'Contract 3',
+    terms: '',
+    status: 'in_progress',
+  });
+  const job = await Job.create({
+    id: 1,
+    description: 'work1',
+    price: 500,
+    paid: true,
+    paymentDate: '2020-01-01T23:11:26.737Z',
+    ContractId: 2,
+  });
+  const job2 = await Job.create({
+    id: 2,
+    description: 'work2',
+    price: 501,
+    paid: true,
+    paymentDate: '2021-01-01T23:11:26.737Z',
+    ContractId: 3,
+  });
+
+  const success_response = await supertest(app)
+    .get('/admin/best-clients?start=01-01-2020&end=01-01-2021&limit=1')
+    .set('profile_id', '3')
+    .send();
+
+  const success_response2 = await supertest(app)
+    .get('/admin/best-clients?start=01-01-2021&end=01-01-2022&limit=1')
+    .set('profile_id', '3')
+    .send();
+
+  expect(success_response.status).toBe(200);
+  expect(success_response.body.bestClients[0].fullName).toBe('John Lenon');
+  expect(success_response.body.bestClients[0].paid).toBe(500);
+
+  expect(success_response2.status).toBe(200);
+  expect(success_response2.body.bestClients[0].fullName).toBe('Joao Carlos');
+  expect(success_response2.body.bestClients[0].paid).toBe(501);
+});

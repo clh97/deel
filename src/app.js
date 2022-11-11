@@ -8,10 +8,6 @@ app.use(bodyParser.json());
 app.set('sequelize', sequelize);
 app.set('models', sequelize.models);
 
-/**
- * FIX ME!
- * @returns contract by id
- */
 app.get('/contracts/:id', getProfile, async (req, res) => {
   const { Contract } = req.app.get('models');
   const { id } = req.params;
@@ -244,6 +240,54 @@ app.get('/admin/best-profession', getProfile, async (req, res) => {
   });
 
   res.status(200).json({ bestProfession: bestProfession[0] }).end();
+});
+
+app.get('/admin/best-clients', getProfile, async (req, res) => {
+  const { Profile, Contract, Job } = req.app.get('models');
+
+  const { start, end, limit } = req.query;
+
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+
+  const bestClients = await Job.findAll({
+    where: {
+      paid: true,
+      paymentDate: {
+        [Op.between]: [startDate, endDate],
+      },
+    },
+    group: ['Contract.Client.id'],
+    order: [[sequelize.fn('sum', sequelize.col('price')), 'DESC']],
+    limit: limit || 2,
+    subQuery: false,
+    attributes: [[sequelize.fn('sum', sequelize.col('price')), 'paid']],
+    include: [
+      {
+        model: Contract,
+        attributes: ['id'],
+        include: [
+          {
+            model: Profile,
+            as: 'Client',
+            where: { type: 'client' },
+            attributes: ['id', 'firstName', 'lastName'],
+          },
+        ],
+      },
+    ],
+  });
+
+  res
+    .status(200)
+    .json({
+      bestClients: bestClients.map((job) => ({
+        paid: job.paid,
+        id: job.Contract.Client.id,
+        fullName: `${job.Contract.Client.firstName} ${job.Contract.Client.lastName}`,
+      })),
+    })
+    .end();
 });
 
 module.exports = app;
