@@ -1,0 +1,317 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2022-11-13T23:47:33.641Z",
+  "__export_source": "insomnia.desktop.app:v2022.6.0",
+  "resources": [
+    {
+      "_id": "req_e407dc311ad8490693d82c1b57a0658c",
+      "parentId": "wrk_aa49828359e34c6ca9da39c2b858d22d",
+      "modified": 1668138052747,
+      "created": 1668105628298,
+      "url": "localhost:3001/contracts/1",
+      "name": "contracts/:id",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_0a6a4b305f814b169a10473fe36ca75f",
+          "name": "profile_id",
+          "value": "1",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "id": "pair_86ffb66c9ffb455896d9163f4462af49",
+          "name": "profile_id",
+          "value": "5",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1668105628298,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_aa49828359e34c6ca9da39c2b858d22d",
+      "parentId": null,
+      "modified": 1668383225535,
+      "created": 1668105625853,
+      "name": "Deel",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_6459dc79119b49fa929672ddc9cd77f5",
+      "parentId": "wrk_aa49828359e34c6ca9da39c2b858d22d",
+      "modified": 1668112891182,
+      "created": 1668112144321,
+      "url": "localhost:3001/contracts",
+      "name": "contracts",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_0a6a4b305f814b169a10473fe36ca75f",
+          "name": "profile_id",
+          "value": "1",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "id": "pair_86ffb66c9ffb455896d9163f4462af49",
+          "name": "profile_id",
+          "value": "7",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1667532003114,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_ed767abf4abe4c1fa2ee94c8b7bee131",
+      "parentId": "wrk_aa49828359e34c6ca9da39c2b858d22d",
+      "modified": 1668113593550,
+      "created": 1668113116036,
+      "url": "localhost:3001/jobs/unpaid",
+      "name": "unpaid jobs for user",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_0a6a4b305f814b169a10473fe36ca75f",
+          "name": "profile_id",
+          "value": "1",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "id": "pair_86ffb66c9ffb455896d9163f4462af49",
+          "name": "profile_id",
+          "value": "7",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1667245190522,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_3c3f7d37d5ae46dc9d6243ef9a691d4b",
+      "parentId": "wrk_aa49828359e34c6ca9da39c2b858d22d",
+      "modified": 1668116284958,
+      "created": 1668114587321,
+      "url": "localhost:3001/jobs/16/pay",
+      "name": "pay job",
+      "description": "",
+      "method": "POST",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_0a6a4b305f814b169a10473fe36ca75f",
+          "name": "profile_id",
+          "value": "1",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "id": "pair_86ffb66c9ffb455896d9163f4462af49",
+          "name": "profile_id",
+          "value": "3",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1667101784226,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_4acf6174423243ffadbeac9a2ef9bff1",
+      "parentId": "wrk_aa49828359e34c6ca9da39c2b858d22d",
+      "modified": 1668138035669,
+      "created": 1668119297031,
+      "url": "localhost:3001/balances/deposit/3",
+      "name": "deposit on client balance",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"amount\": 30\n}"
+      },
+      "parameters": [
+        {
+          "id": "pair_0a6a4b305f814b169a10473fe36ca75f",
+          "name": "profile_id",
+          "value": "1",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "id": "pair_86ffb66c9ffb455896d9163f4462af49",
+          "name": "profile_id",
+          "value": "3",
+          "description": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_68d7795f808b479dbe843fcb3fc40650"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1667030081078,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_8473e5d841264e18ba39239c5bbe7456",
+      "parentId": "wrk_aa49828359e34c6ca9da39c2b858d22d",
+      "modified": 1668126851896,
+      "created": 1668123409612,
+      "url": "localhost:3001/admin/best-profession?start=01-01-2020&end=08-12-2020",
+      "name": "best profession",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_0a6a4b305f814b169a10473fe36ca75f",
+          "name": "profile_id",
+          "value": "1",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "id": "pair_86ffb66c9ffb455896d9163f4462af49",
+          "name": "profile_id",
+          "value": "3",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1666994229504,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_2848009580aa490f8e6d382549a9e245",
+      "parentId": "wrk_aa49828359e34c6ca9da39c2b858d22d",
+      "modified": 1668130556621,
+      "created": 1668129469280,
+      "url": "localhost:3001/admin/best-clients?start=01-01-2019&end=12-01-2021&limit=10",
+      "name": "best clients",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_0a6a4b305f814b169a10473fe36ca75f",
+          "name": "profile_id",
+          "value": "1",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "id": "pair_86ffb66c9ffb455896d9163f4462af49",
+          "name": "profile_id",
+          "value": "3",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1666976303717,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_927f95e3eb6a1fac732d6f979d550e57d230377d",
+      "parentId": "wrk_aa49828359e34c6ca9da39c2b858d22d",
+      "modified": 1668105625858,
+      "created": 1668105625858,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1668105625858,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_927f95e3eb6a1fac732d6f979d550e57d230377d",
+      "parentId": "wrk_aa49828359e34c6ca9da39c2b858d22d",
+      "modified": 1668105625859,
+      "created": 1668105625859,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_d1f28c3ca0d84939bc22b46d2f0b3052",
+      "parentId": "wrk_aa49828359e34c6ca9da39c2b858d22d",
+      "modified": 1668105625854,
+      "created": 1668105625854,
+      "fileName": "My Collection",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    }
+  ]
+}
