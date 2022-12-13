@@ -1,36 +1,3 @@
-# DEEL BACKEND TASK
-
-  
-
-💫 Welcome! 🎉
-
-
-This backend exercise involves building a Node.js/Express.js app that will serve a REST API. We imagine you should spend around 3 hours at implement this feature.
-
-## Data Models
-
-> **All models are defined in src/model.js**
-
-### Profile
-A profile can be either a `client` or a `contractor`. 
-clients create contracts with contractors. contractor does jobs for clients and get paid.
-Each profile has a balance property.
-
-### Contract
-A contract between and client and a contractor.
-Contracts have 3 statuses, `new`, `in_progress`, `terminated`. contracts are considered active only when in status `in_progress`
-Contracts group jobs within them.
-
-### Job
-contractor get paid for jobs by clients under a certain contract.
-
-## Getting Set Up
-
-  
-The exercise requires [Node.js](https://nodejs.org/en/) to be installed. We recommend using the LTS version.
-
-  
-
 1. Start by cloning this repository.
 
   
