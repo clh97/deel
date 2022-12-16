@@ -1,24 +1,3 @@
-1. Start by cloning this repository.
-
-  
-
-1. In the repo root directory, run `npm install` to gather all dependencies.
-
-  
-
-1. Next, `npm run seed` will seed the local SQLite database. **Warning: This will drop the database if it exists**. The database lives in a local file `database.sqlite3`.
-
-  
-
-1. Then run `npm start` which should start both the server and the React client.
-
-  
-
-❗️ **Make sure you commit all changes to the master branch!**
-
-  
-  
-
 ## Technical Notes
 
   
@@ -73,21 +52,3 @@ Below is a list of the required API's for the application.
     }
 ]
 ```
-
-  
-
-## Going Above and Beyond the Requirements
-
-Given the time expectations of this exercise, we don't expect anyone to submit anything super fancy, but if you find yourself with extra time, any extra credit item(s) that showcase your unique strengths would be awesome! 🙌
-
-It would be great for example if you'd write some unit test / simple frontend demostrating calls to your fresh APIs.
-
-  
-
-## Submitting the Assignment
-
-When you have finished the assignment, create a github repository and send us the link.
-
-  
-
-Thank you and good luck! 🙏
